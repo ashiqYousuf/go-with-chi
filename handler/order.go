@@ -5,8 +5,7 @@ import (
 	"net/http"
 )
 
-type Order struct {
-}
+type Order struct{}
 
 func (o *Order) Create(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("create method")
