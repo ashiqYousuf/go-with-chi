@@ -122,6 +122,8 @@ func (r *RedisRepo) FindAll(ctx context.Context, page FindAllPage) (FindResult, 
 		return FindResult{}, fmt.Errorf("failed to get order ids: %w", err)
 	}
 
+	fmt.Println("KEYS", keys)
+
 	if len(keys) == 0 {
 		return FindResult{
 			Orders: []model.Order{},
@@ -136,6 +138,10 @@ func (r *RedisRepo) FindAll(ctx context.Context, page FindAllPage) (FindResult, 
 	orders := make([]model.Order, len(xs))
 
 	for i, x := range xs {
+
+		if x == nil {
+			continue
+		}
 		x := x.(string)
 		var order model.Order
 
